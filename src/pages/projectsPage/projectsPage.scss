@@ -1,0 +1,26 @@
+.projects-page {
+	.projects {
+		border-top: 8px solid #FEE108;
+		padding-top: 15px;
+		@media screen and (min-width: 1200px) {
+			padding-top: 68px;
+		}
+		.p-title {
+			font-weight: bold;
+			font-size: 20px;
+			color: #FFFFFF;
+			margin-bottom: 30px;
+			@media screen and (min-width: 1200px) {
+				font-size: 35px;
+			}
+			&::after {
+				content: '';
+				display: block;
+				width: 124px;
+				border-bottom: 4px solid #FEE108;
+				margin-top: 15px;
+				margin-left: 10px;
+			}
+		}
+	}
+}

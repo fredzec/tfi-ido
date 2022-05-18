@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptSettings">
+    <option name="languageLevel" value="JSX" />
+  </component>
+  <component name="ProjectPlainTextFileTypeManager">
+    <file url="file://$PROJECT_DIR$/src/config/abi/pancakeProfile.json" />
+    <file url="file://$PROJECT_DIR$/src/config/abi/pancakeRabbits.json" />
+    <file url="file://$PROJECT_DIR$/src/config/abi/pointCenterIfo.json" />
+    <file url="file://$PROJECT_DIR$/src/config/abi/predictions.json" />
+    <file url="file://$PROJECT_DIR$/src/config/abi/sousChef.json" />
+    <file url="file://$PROJECT_DIR$/src/config/abi/sousChefBnb.json" />
+    <file url="file://$PROJECT_DIR$/src/config/abi/sousChefV2.json" />
+    <file url="file://$PROJECT_DIR$/src/config/abi/syrup.json" />
+    <file url="file://$PROJECT_DIR$/src/config/abi/tradingCompetition.json" />
+  </component>
+</project>

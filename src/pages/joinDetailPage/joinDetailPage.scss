@@ -1,0 +1,341 @@
+.join-detail-page {
+	.main-content {
+		border-top: 8px solid #FEE108;
+		padding-top: 55px;
+
+		.avatar {
+			width: 50px;
+			height: 50px;
+			border: 2px solid #FEE108;
+			border-radius: 50%;
+			overflow: hidden;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin-right: 3px;
+			box-sizing: border-box;
+			@media screen and (min-width: 1200px) {
+				width: 80px;
+				height: 80px;
+			}
+
+			img {
+				width: 100%;
+				height: 100%;
+				@media screen and (min-width: 1200px) {
+					width: 70%;
+					height: 70%;
+				}
+				border-radius: 50%;
+				object-fit: contain;
+			}
+		}
+		.project-title {
+			font-weight: bold;
+			font-size: 20px;
+			@media screen and (min-width: 1200px) {
+				font-size: 45px;
+			}
+		}
+		.project-subtitle {
+			font-weight: bold;
+			font-size: 17px;
+			color: #FEE108;
+			@media screen and (min-width: 1200px) {
+				font-size: 31px;
+			}
+		}
+		.tag {
+			font-weight: bold;
+			font-size: 22px;
+			background: #FEE108;
+			border-radius:0 0 10px 10px;
+			position: absolute;
+			color: #000;
+			top: -60px;
+			right: 10px;
+			padding: 15px;
+			@media screen and (min-width: 1200px) {
+				font-size: 38px;
+				top: -55px;
+				right: 0;
+				padding: 20px;
+
+			}
+		}
+		.project-desc-text {
+			font-size: 15px;
+			margin-top: 32px;
+			margin-bottom: 22px;
+			@media screen and (min-width: 1200px) {
+				font-size: 18px;
+			}
+		}
+		.participate-wrap, .swap-wrap, .token-deal-info {
+			background: #000000;
+			border: 4px solid #FEE108;
+			box-sizing: border-box;
+			border-radius: 15px;
+			padding: 21px 33px 0 33px;
+		}
+		.participate-wrap {
+			width: 100%;
+			margin-bottom: 15px;
+			padding-bottom: 15px;
+			@media screen and (min-width: 1200px) {
+				width: 65%;
+				margin-bottom: 0;
+				padding-bottom: 0;
+			}
+			.participate-wrap-acea-row{
+				flex-direction: column;
+				@media screen and (min-width: 1200px) {
+					flex-direction: row;
+				}
+			}
+			.participate-deal {
+				margin-right: 0;
+				@media screen and (min-width: 1200px) {
+					margin-right: 8%;
+				}
+			}
+			.acea-row-margin {
+				margin-bottom: 10px;
+			}
+			.ido-chain-info {
+				display: flex;
+				align-items: center;
+				margin-right: 20px;
+				.label {
+					min-width: 100px;
+					margin-right: 10px;
+				}
+				.logo {
+					width: 35px;
+					height: 35px;
+					border-radius: 50%;
+					background-color: #fff;
+				}
+			}
+			.input-title{
+				margin-right: 10px;
+				flex: 2;
+				line-height: 1.5;
+			}
+			.input-wrap {
+				width: 100%;
+				border: 2px solid #FFFFFF;
+				border-radius: 17px;
+				height: 30px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				& > input {
+					background-color: transparent;
+					width: 80%;
+					height: 90%;
+					border: none;
+					outline: none;
+					color: #FFFFFF;
+				}
+			}
+			.approve-btn {
+				width: 100%;
+				height: 30px;
+				background: #FEE108;
+				border-radius: 17px;
+				color: #000;
+				font-weight: bold;
+				font-size: 17px;
+				margin-bottom: 10px;
+			}
+			.approve-btn.disable {
+				background: #ccc;
+				cursor: not-allowed;
+			}
+			.pd-row {
+				border-bottom: 2px solid #C2C2C2;
+				padding-bottom: 5px;
+				margin-top: 10px;
+			}
+			.tips {
+				font-size: 11px;
+				margin-top: 20px;
+				margin-bottom: 5px;
+			}
+		}
+		.swap-wrap {
+			width: 100%;
+			font-size: 20px;
+			padding-bottom: 15px;
+			@media screen and (min-width: 1200px) {
+				width: 34%;
+				padding-bottom: 0;
+			}
+			.swap-title {
+				font-weight: bold;
+				font-size: 23px;
+				margin-bottom: 15px;
+				@media screen and (min-width: 1200px) {
+					font-size: 30px;
+					margin-bottom: 50px;
+				}
+			}
+			.progress-warp {
+				width: 100%;
+				height: 49px;
+				border: 4px solid #FFFFFF;
+				border-radius: 37px;
+				margin: 8px 0;
+				z-index:1;
+				overflow: hidden;
+				position: relative;
+			}
+			.progress-line {
+				position: absolute;
+				left: 0;
+				top:0px;
+				width: 40%;
+				height: 100%;
+				background-color: #5D9921;
+				border-radius: 37px;
+				z-index: -1;
+			}
+		}
+		.token-deal-info {
+			margin-top: 20px;
+			padding-bottom: 40px;
+			.detail-item {
+				border-bottom: 2px solid #C2C2C2;
+				font-weight: 500;
+				font-size: 15px;
+				line-height: 23px;
+				padding-bottom: 5px;
+				padding-top: 5px;
+				flex:  1;
+				@media screen and (min-width: 1200px) {
+					font-size: 20px;
+					padding-bottom: 5px;
+					padding-top: 0px;
+				}
+				&:nth-of-type(2) {
+					@media screen and (min-width: 1200px) {
+						margin: 0 3%;
+					}
+				}
+
+				img {
+					width: 20px;
+					height: 20px;
+					margin-right: 4px;
+				}
+			}
+			.tdi-tip{
+				font-size: 15px;
+				margin-top: 10px;
+				@media screen and (min-width: 1200px) {
+					font-size: 20px;
+				}
+			}
+			.token-acea-row {
+				flex-direction: column;
+				@media screen and (min-width: 1200px) {
+					flex-direction: row;
+					margin-top:  30px;
+					&:nth-of-type(1) {
+						margin-top:  0px;
+					}
+				}
+			}
+		}
+		.about-wrap {
+			background: #000000;
+			border: 4px solid #FEE108;
+			border-radius: 15px 15px 0 0;
+			padding: 48px 33px 0 33px;
+			margin-top: 46px;
+			margin-bottom: -10px;
+			border-bottom: 0;
+		}
+		.pd-title {
+			font-weight: bold;
+			font-size: 23px;
+			position: relative;
+			margin-bottom: 18px;
+			@media screen and (min-width: 1200px) {
+				font-size: 35px;
+			}
+
+			&::after {
+				content: '';
+				width: 87px;
+				border-bottom: 3px solid #FEE108;
+				display: block;
+				margin-top: 3px;
+			}
+		}
+
+
+	}
+	.pic-wrap {
+		width: 100%;
+		margin: 0 auto;
+		margin-bottom: 15px;
+		@media screen and (min-width: 1200px) {
+			width: 90%;
+			margin: 0 auto;
+			height: 318px;
+			margin-bottom: 15px;
+		}
+		.pic-left-wrap {
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+			border-radius: 25px;
+			@media screen and (min-width: 1200px) {
+				width: 49.5%;
+			}
+		}
+		.pic-right-wrap {
+			width: 100%;
+			height: 100%;
+			align-content: space-between;
+			@media screen and (min-width: 1200px) {
+				width: 49.5%;
+			}
+			.pic-right-item {
+				width: 49%;
+				height: 48%;
+				overflow: hidden;
+				border-radius: 25px;
+			}
+		}
+		.pic {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			cursor: pointer;
+		}
+	}
+	.mask {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(1,1,1,.5);
+		opacity: 0;
+		z-index: -1;
+		transition: all 0.3s;
+		& > img {
+			width: 50%;
+			height: 50%;
+			object-fit: contain;
+		}
+		&.pop-active {
+			opacity: 1;
+			z-index: 99;
+		}
+	}
+}
