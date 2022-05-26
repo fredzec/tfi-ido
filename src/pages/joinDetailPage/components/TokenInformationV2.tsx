@@ -31,11 +31,11 @@ const TokenInformationV2:React.FC<props> = ({detail})=>{
         <div className="acea-row  token-acea-row">
           <div className="detail-item acea-row row-between">
             <div>Launch Date</div>
-            <div>{moment(detail.launchTime).utc().format('L UTC')}</div>
+            <div>{detail.startTimeForShow || moment(detail.launchTime).utc().format('L UTC')}</div>
           </div>
           <div className="detail-item acea-row row-between">
             <div>End Date</div>
-            <div>{moment(detail.endTime).utc().format('L UTC')}</div>
+            <div>{detail.endTimeForShow || moment(detail.endTime).utc().format('L UTC')}</div>
           </div>
           <div className="detail-item acea-row row-between">
             <div>Token Distribution</div>

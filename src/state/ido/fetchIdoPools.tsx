@@ -76,6 +76,8 @@ export const fetchIdoPools = async()=>{
         // idoTokenSymbol: idoTokenSymbol[0].toString(),
         // idoTokenSymbol: findLocal.idoTokenSymbol,
         poolMaxAmount: new BigNumber(poolWhiteListAmountData[0].toString()).div(DEFAULT_TOKEN_DECIMAL).toNumber(),
+        startTimeForShow: findLocal.startTime,
+        endTimeForShow: findLocal.endTime
       }
       return idoPool
     })

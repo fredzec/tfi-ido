@@ -54,7 +54,7 @@ class TopDesc extends Component {
 								</div>) : null
 							}
 						</div>
-						<a href="https://projectapplication.typeform.com/Trustfi-IDO" className="d-btn y bt">Apply for Launchpad</a>
+						<a href="https://go-application.typeform.com/TrustFi-IDO" className="d-btn y bt">Apply for Launchpad</a>
 						<a href="https://www.certik.com/projects/trustfinetwork" target="_blank" className="d-btn b bt">Audit Report</a>
 					</div>
 					<div className="news acea-row row-middle">

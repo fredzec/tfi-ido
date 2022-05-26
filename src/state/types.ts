@@ -25,8 +25,10 @@ export interface IdoConfig {
   idoFactory: string
   // Millisecond Timestamp
   startTime: number
+  startTimeForShow: string
   // Millisecond Timestamp
   endTime: number
+  endTimeForShow: string
   amount: number
   idoToken: string
   supportCommToken: string
@@ -65,8 +67,11 @@ export interface IdoConfigV2 {
   idoFactory: string
   // Millisecond Timestamp pool start
   startTime: number
+  startTimeForShow: string
   // Millisecond Timestamp pool end
   endTime: number
+  endTimeForShow: string
+
   claimStartTime: number
   claimEndTime: number
   amount: number

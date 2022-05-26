@@ -98,6 +98,8 @@ export const fetchIdoPools = async()=>{
         claimEndTime: new BigNumber(poolStakeInfoData[0].claimEndTime.toString()).times(1000).toNumber(),
         claimRatio: new BigNumber( poolStakeInfoData[0].ratioToken.toString()).div(DEFAULT_TOKEN_DECIMAL).toNumber(),
         isBSC:  new BigNumber(poolStakeInfoData[0].isBSC.toString()).toNumber(),
+        startTimeForShow: findLocal.startTime,
+        endTimeForShow: findLocal.endTime
       }
       return idoPool
     })

@@ -32,13 +32,13 @@ const ProjectCard:React.FC<props> = ({pool,viewKey,version})=>{
         <div className="pi-row">
           <div className="pi-row-left">IDO Starts:</div>
           <div className="pi-row-right">
-            {moment(pool.startTime).utc().format('L LT UTC')}
+            {pool.startTimeForShow || moment(pool.startTime).utc().format('L LT UTC')}
           </div>
         </div>
         <div className="pi-row">
           <div className="pi-row-left">IDO Ends:</div>
           <div className="pi-row-right">
-            {moment(pool.endTime).utc().format('L LT UTC')}
+            {pool.endTimeForShow || moment(pool.endTime).utc().format('L LT UTC')}
           </div>
         </div>
         {/*
