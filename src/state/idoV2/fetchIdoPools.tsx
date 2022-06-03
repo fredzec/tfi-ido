@@ -1,16 +1,15 @@
-import {getIdoFactoryAddress, getIdoFactoryAddressV2} from "../../utils/addressHelpers";
+import { getIdoFactoryAddressV2 } from "../../utils/addressHelpers";
 import multicall from "../../utils/multicall";
 import idoFactoryV2Abi from "config/abi/TrustFiIDOFactoryV2.json"
 import erc20Abi from "config/abi/erc20.json"
-import {IdoConfig,IdoConfigV2} from "../types";
+import { IdoConfigV2 } from "../types";
 import BigNumber from "bignumber.js";
-import {DEFAULT_TOKEN_DECIMAL, DEFAULT_TOKEN_ZERO_ADDRESS} from "../../config";
-import {getIdoPoolsConfig} from "./helpers";
-import {IdoDefaultData} from "../../config/constants/idos";
+import { DEFAULT_TOKEN_DECIMAL, DEFAULT_TOKEN_ZERO_ADDRESS } from "../../config";
+import { getIdoPoolsConfig } from "./helpers";
+import { IdoDefaultData } from "../../config/constants/idos";
 
 export const fetchIdoPools = async()=>{
   const idoFactoryAddress = getIdoFactoryAddressV2()
-  // const idoFactoryAddress = getIdoFactoryAddress()
   // get pool length
   const calls = [
     {
@@ -50,19 +49,7 @@ export const fetchIdoPools = async()=>{
       ]
       const [
         poolStakeInfoData,
-        poolWhiteListAmountData,
       ] = await multicall(idoFactoryV2Abi, calls1)
-      // get IdoToken symbol
-      // const calls2 = [
-      //   {
-      //     address: poolStakeInfoData[0].IDOToken,
-      //     name: 'symbol',
-      //     params: [],
-      //   },
-      // ]
-      // const [
-      //   idoTokenSymbol,
-      // ] = await multicall(erc20Abi, calls2)
       let idoTokenDecimalsV = 18
       if(poolStakeInfoData[0].IDOToken!==DEFAULT_TOKEN_ZERO_ADDRESS){
         const calls2 = [
@@ -77,7 +64,6 @@ export const fetchIdoPools = async()=>{
         ] = await multicall(erc20Abi, calls2)
         idoTokenDecimalsV = new BigNumber(decimals[0].toString()).toNumber()
       }
-      // const findLocal = IdoPoolsLocal.find((item)=>item.poolId===index)
       const findLocal = poolInfoChain.find((item)=>item.poolId===index)??IdoDefaultData
 
       const idoPool: IdoConfigV2 = {
@@ -104,9 +90,8 @@ export const fetchIdoPools = async()=>{
       return idoPool
     })
   )
-  const poolIds = poolInfoChain.map((item)=>{return item.poolId})
-  const fliterData = data.filter((item)=>  poolIds.includes(item.poolId))
-  return fliterData
+  // 根据配置的顺序组织poolList的显示
+  return poolInfoChain
+    .map((config) => data.find((pool) => pool.poolId === config.poolId))
+    .filter((config) => !!config)
 }
-
-export default null
