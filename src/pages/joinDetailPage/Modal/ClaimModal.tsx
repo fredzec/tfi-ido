@@ -1,7 +1,7 @@
 import BigNumber from 'bignumber.js'
 import styled from 'styled-components'
 import React, { useCallback, useMemo, useState } from 'react'
-import {Button, Modal, LinkExternal, Input} from '@vipswap/uikit'
+import {Button, Modal, LinkExternal, Input} from 'trustfi-uikit'
 import {IdoConfigV2} from "../../../state/types";
 import {useClaimOtherChain} from "../hooks/useClaim";
 import {useSnackbar} from "notistack";

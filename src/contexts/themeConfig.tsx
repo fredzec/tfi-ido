@@ -1,4 +1,4 @@
-import {light, dark, Colors, TooltipTheme, CardTheme, ToggleTheme, ModalTheme, NavTheme} from '@vipswap/uikit'
+import {light, dark, Colors, TooltipTheme, CardTheme, ToggleTheme, ModalTheme, NavTheme} from 'trustfi-uikit'
 import { css } from 'styled-components'
 
 const lightColors: Colors = {

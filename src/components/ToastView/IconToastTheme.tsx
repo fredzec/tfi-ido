@@ -9,7 +9,7 @@ import {AlertProps,
   Text,
   IconButton,
   CloseIcon
-} from "@vipswap/uikit";
+} from "trustfi-uikit";
 import {SnackbarContent, useSnackbar} from "notistack";
 
 interface ThemedIconLabel {

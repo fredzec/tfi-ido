@@ -3,7 +3,7 @@ import {IdoConfigV2} from "../../../state/types";
 import {useApproveTokenToFactoryV2} from "../hooks/useApprove";
 import {useWeb3React} from "@web3-react/core";
 import useAuth from "../../../hooks/useAuth";
-import {useModal, useWalletModal} from "@vipswap/uikit";
+import {useModal, useWalletModal} from "trustfi-uikit";
 import useStake, {useStakeV2} from "../hooks/useStake";
 import {useSnackbar} from "notistack";
 import {Collapse} from "@material-ui/core";

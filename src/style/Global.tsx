@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
-import { PancakeTheme } from '@vipswap/uikit/dist/theme'
+import { PancakeTheme } from 'trustfi-uikit/dist/theme'
 
 declare module 'styled-components' {
   export interface DefaultTheme extends PancakeTheme {

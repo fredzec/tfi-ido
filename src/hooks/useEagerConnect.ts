@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { connectorLocalStorageKey, ConnectorNames } from '@vipswap/uikit'
+import { connectorLocalStorageKey, ConnectorNames } from 'trustfi-uikit'
 import useAuth from 'hooks/useAuth'
 
 const _binanceChainListener = async () =>

@@ -8,7 +8,7 @@ import useActiveWeb3React from "../../hooks/useActiveWeb3React";
 import useAuth from "../../hooks/useAuth";
 import {DEFAULT_TOKEN_DECIMAL,walletSet} from "../../config";
 import tokens from "../../config/constants/tokens";
-import {useWalletModal} from "@vipswap/uikit";
+import {useWalletModal} from "trustfi-uikit";
 import {useGetBnbBalance} from "../../hooks/useTokenBalance";
 import MenuButton from "./MenuButton";
 import styled, {keyframes} from "styled-components";
