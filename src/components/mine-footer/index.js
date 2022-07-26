@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import logo from '../../common/images/logo.png'
 import pancakeSwap from '../../common/images/pancakeSwap-w.png'
 import mexcGlobal from '../../common/images/mexcGlobal-w.png'
-import hoo from '../../common/images/hoo-w.png'
 import en from '../../common/images/en.png'
 import tu from '../../common/images/tu.png'
 import vi from '../../common/images/vi.png'
@@ -35,10 +34,6 @@ class MineFooter extends Component {
 						<a href="https://www.mexc.com/exchange/TRUSTFI_USDT" target="_blank" className="support-item">
 							<img src={mexcGlobal} className="support-img"/>
 							<div>TRUSTFI/USDT</div>
-						</a>
-						<a href="https://www.hoo.com/spot/tfi-usdt" target="_blank" className="support-item">
-							<img src={hoo} className="support-img hoo"/>
-							<div>TFI/USDT</div>
 						</a>
 					</div>
 					<div className="footer-item footer-about">

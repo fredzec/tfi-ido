@@ -5,7 +5,7 @@ import erc20Abi from "config/abi/erc20.json"
 import { IdoConfigV2 } from "../types";
 import BigNumber from "bignumber.js";
 import { DEFAULT_TOKEN_DECIMAL, DEFAULT_TOKEN_ZERO_ADDRESS } from "../../config";
-import { getIdoPoolsConfig } from "./helpers";
+import { getIdoPoolsClaimConfig, getIdoPoolsConfig } from "./helpers";
 import { IdoDefaultData } from "../../config/constants/idos";
 
 export const fetchIdoPools = async()=>{
@@ -29,7 +29,10 @@ export const fetchIdoPools = async()=>{
   ] = await multicall(idoFactoryV2Abi, calls)
 
   const poolCount = Number(poolCountData[0].toString())
-  const poolInfoList = await getIdoPoolsConfig()
+  const [poolInfoList, poolClaimInfoList] = await Promise.all([
+    getIdoPoolsConfig(),
+    getIdoPoolsClaimConfig(),
+  ])
   const curChainName = process.env.REACT_APP_CHAIN_NAME
   const poolInfoChain = poolInfoList[curChainName]
 
@@ -65,6 +68,7 @@ export const fetchIdoPools = async()=>{
         idoTokenDecimalsV = new BigNumber(decimals[0].toString()).toNumber()
       }
       const findLocal = poolInfoChain.find((item)=>item.poolId===index)??IdoDefaultData
+      const claimConfigItem = (poolClaimInfoList?.poolList ?? []).find((item) => item.poolId === index)
 
       const idoPool: IdoConfigV2 = {
         ...findLocal,
@@ -85,7 +89,8 @@ export const fetchIdoPools = async()=>{
         claimRatio: new BigNumber( poolStakeInfoData[0].ratioToken.toString()).div(DEFAULT_TOKEN_DECIMAL).toNumber(),
         isBSC:  new BigNumber(poolStakeInfoData[0].isBSC.toString()).toNumber(),
         startTimeForShow: findLocal.startTime,
-        endTimeForShow: findLocal.endTime
+        endTimeForShow: findLocal.endTime,
+        configClaimUrl: claimConfigItem?.claimUrl,
       }
       return idoPool
     })

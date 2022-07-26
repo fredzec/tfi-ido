@@ -1,19 +1,17 @@
-import React, {useCallback, useEffect, useState} from "react";
-import {IdoConfigV2} from "../../../state/types";
-import {useApproveTokenToFactoryV2} from "../hooks/useApprove";
-import {useWeb3React} from "@web3-react/core";
+import React, { useCallback, useEffect, useState } from "react";
+import { IdoConfigV2 } from "../../../state/types";
+import { useApproveTokenToFactoryV2 } from "../hooks/useApprove";
+import { useWeb3React } from "@web3-react/core";
 import useAuth from "../../../hooks/useAuth";
-import {useModal, useWalletModal} from "trustfi-uikit";
-import useStake, {useStakeV2} from "../hooks/useStake";
-import {useSnackbar} from "notistack";
-import {Collapse} from "@material-ui/core";
-import {useGetIdoUserDataByIdV2} from "../../../state/idoV2/hooks";
-import {useRefund} from "../hooks/useRefund";
-import {useClaim} from "../hooks/useClaim";
-import {useTokenBalanceOfIdoContractV2} from "../../../hooks/useTokenBalance";
+import { useWalletModal } from "trustfi-uikit";
+import { useStakeV2 } from "../hooks/useStake";
+import { useSnackbar } from "notistack";
+import { Collapse } from "@material-ui/core";
+import { useGetIdoUserDataByIdV2 } from "../../../state/idoV2/hooks";
+import { useRefund } from "../hooks/useRefund";
+import { useClaim } from "../hooks/useClaim";
+import { useTokenBalanceOfIdoContractV2 } from "../../../hooks/useTokenBalance";
 import BigNumber from "bignumber.js";
-import {DEFAULT_TOKEN_DECIMAL} from "../../../config";
-import ClaimModal from "../Modal/ClaimModal";
 
 interface props {
   detail: IdoConfigV2
@@ -317,7 +315,9 @@ const ParticipateV2:React.FC<props> = ({detail})=>{
               </div>
             </div>
             <div className="acea-row acea-row-margin">
-              <div className="input-title">Commit your funds</div>
+              <div className="input-title">
+                Commit your funds
+              </div>
               <div style={{flex: 3}}>
                 <div className="input-wrap">
                   <input
@@ -345,7 +345,11 @@ const ParticipateV2:React.FC<props> = ({detail})=>{
               </div>
             )}
             <div className="acea-row acea-row-margin">
-              <div className="input-title" />
+              <div className="input-title">
+                {detail.configClaimUrl && (
+                  <div className="approve-btn acea-row row-center-wrapper bt" style={{ backgroundColor: '#FEE108' }} onClick={() => {window.open(detail.configClaimUrl)}}>Claim</div>
+                )}
+              </div>
               <div style={{flex: 3}}>
                 {account && userData && renderBtn()}
                 {!account && (

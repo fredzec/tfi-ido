@@ -115,6 +115,9 @@ export interface IdoConfigV2 {
   website?: string
   twitter?: string
   telegram?: string
+
+  // 远程配置信息
+  configClaimUrl?: string
 }
 export interface IdoUserData {
   poolId: number

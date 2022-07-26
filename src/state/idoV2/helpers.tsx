@@ -31,3 +31,28 @@ export const getIdoPoolsConfig = async () => {
     }
   }
 }
+
+export const getIdoPoolsClaimConfig = async () => {
+  try {
+    const url = "https://raw.githubusercontent.com/fredzec/config/main/claim.json"
+    const response = await fetch(url, {
+      method: 'get',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+    })
+    if (!response.ok) {
+      console.error(response)
+      return {
+        "poolList": [],
+      }
+    }
+    return await response.json()
+  }catch (e) {
+    console.error(e)
+    return {
+      "poolList": [],
+    }
+  }
+}
