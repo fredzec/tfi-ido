@@ -86,7 +86,7 @@ class MineHeader extends Component {
 						<div className="nav-item" onClick={this.goFAQ.bind(this)}>FAQ</div>
 						<div className="nav-item" onClick={this.scrollToHp.bind(this)}>How to Participate</div>
 						<Link className="nav-item" to="/projects">Project</Link>
-						<a  className="nav-item" href="https://farmerbsc.trustfi.org/" target="_blank" rel="noreferrer">Staking</a>
+						<a  className="nav-item" href="https://farmer.trustfi.org/" target="_blank" rel="noreferrer">Staking</a>
 						<img className="bnb" src={BNB}/>
 						{!showMenu && (
 							<WalletFun/>
@@ -103,7 +103,7 @@ class MineHeader extends Component {
 					<div className="nav-item-m" onClick={this.goFAQ.bind(this)}>FAQ</div>
 					<div className="nav-item-m" onClick={this.scrollToHp.bind(this)}>How to Participate</div>
 					<Link className="nav-item-m" to="/projects">Project</Link>
-					<a  className="nav-item-m" href="https://farmerbsc.trustfi.org/" target="_blank" rel="noreferrer">Staking</a>
+					<a  className="nav-item-m" href="https://farmer.trustfi.org/" target="_blank" rel="noreferrer">Staking</a>
 
 					<WalletFun/>
 				</StyledMobileMenu>
