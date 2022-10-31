@@ -70,17 +70,25 @@ const ProjectList:React.FC<props> = ({viewKey})=>{
   const closePools = pools.filter((item)=> item.endTime <= curTime)
   const activePoolsV2 = poolsV2.filter((item)=> item.endTime > curTime)
   const closePoolsV2 = poolsV2.filter((item)=> item.endTime <= curTime)
+  const activePoolToShow = [...activePoolsV2.map((pool) => ({ ...pool, version: 'v2'})), ...activePools.map((pool) => ({ ...pool, version: 'v1'}))]
+    .sort((a, b) => {
+      return a.startTime - b.startTime
+    })
+  const closePoolsToShow = [...closePoolsV2.map((pool) => ({ ...pool, version: 'v2'})), ...closePools.map((pool) => ({ ...pool, version: 'v1'}))]
+    .sort((a, b) => {
+      return b.endTime - a.endTime
+    })
 
   return viewKey  === 'closed'?(
     <div className="acea-row">
-      {closePoolsV2.map((item) => <ProjectCard pool={item} key={item.poolId} viewKey="upcoming" version="v2"/>)}
-      {closePools.map((item) => <ProjectCard pool={item} key={item.poolId} viewKey="upcoming" version="v1"/>)}
+      {/* @ts-ignore */}
+      {closePoolsToShow.map((item) => <ProjectCard pool={item} key={item.version + item.poolId} viewKey="upcoming" version={item.version} />)}
       {closedPrjects.map((item,index) => <ProjectsItem itemData={item} key={index} detailAble={false}  joinAble={false}/>)}
     </div>
   ):(
     <div className="acea-row">
-      {activePoolsV2.map((item) => <ProjectCard pool={item} key={item.poolId} viewKey={viewKey} version="v2"/>)}
-      {activePools.map((item) => <ProjectCard pool={item} key={item.poolId} viewKey={viewKey} version="v1"/>)}
+      {/* @ts-ignore */}
+      {activePoolToShow.map((item) => <ProjectCard pool={item} key={item.poolId} viewKey={viewKey} version={item.version} />)}
     </div>
   )
 }
