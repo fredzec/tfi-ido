@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react'
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import logo from '../../common/images/logo.png'
 import BNB from '../../common/images/bnb.png'
@@ -12,7 +12,7 @@ import {useWalletModal} from "trustfi-uikit";
 import {useGetBnbBalance} from "../../hooks/useTokenBalance";
 import MenuButton from "./MenuButton";
 import styled, {keyframes} from "styled-components";
-// import { withRouter } from 'react-router-dom'
+import useSpaceId from "../../hooks/useSpaceId";
 
 
 function WalletFun() {
@@ -22,6 +22,7 @@ function WalletFun() {
 	const tokenBalance = new BigNumber(tokenBalanceData.balance).div(DEFAULT_TOKEN_DECIMAL).toNumber().toLocaleString('en-US', { maximumFractionDigits: 3 })
 	const { onPresentConnectModal, onPresentAccountModal } = useWalletModal(login, logout, account, walletSet.helpLink, walletSet.scanLink, walletSet.scanLabel,tokenBalance,tokens.bnb.symbol);
 	const accountEllipsis = account ? `${account.substring(0, 4)}...${account.substring(account.length - 4)}` : null;
+  const spaceIdName = useSpaceId()
 
 	const connectWallet = ()=>{
 		if (account){
@@ -29,11 +30,11 @@ function WalletFun() {
 		}else{
 			onPresentConnectModal()
 		}
-
 	}
+
 	return (
 		<div className="connect-btn acea-row row-center-wrapper bt" onClick={connectWallet}>
-			{account?accountEllipsis:'Connect'}
+			{account?(spaceIdName ? spaceIdName : accountEllipsis):'Connect'}
 		</div>
 	)
 }
