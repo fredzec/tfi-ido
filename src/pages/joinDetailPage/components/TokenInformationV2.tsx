@@ -9,9 +9,11 @@ interface props {
 const TokenInformationV2:React.FC<props> = ({detail})=>{
   const chainInfo = getChainInfo(detail?detail.chainId:56)
 
+  const isTestPool = detail.poolId === 137;
+
   return (
     <div className="token-deal-info">
-      <div className="pd-title">Token & Deal Information</div>
+      <div className="pd-title">{isTestPool ? 'NFT' : 'Token'} & Deal Information</div>
       <div>
         <div className="acea-row token-acea-row">
           <div className="detail-item acea-row row-between">
@@ -21,10 +23,10 @@ const TokenInformationV2:React.FC<props> = ({detail})=>{
           </div>
           <div className="detail-item acea-row row-between">
             <div>Type</div>
-            <div>{detail.type}</div>
+            <div>{isTestPool ? 'NFT SALE' : detail.type}</div>
           </div>
           <div className="detail-item acea-row row-between">
-            <div>Token Price</div>
+            <div>{isTestPool ? 'NFT' : 'Token'} Price</div>
             <div>${detail.idoTokenPrice}</div>
           </div>
         </div>
@@ -38,7 +40,7 @@ const TokenInformationV2:React.FC<props> = ({detail})=>{
             <div>{detail.endTimeForShow || moment(detail.endTime).utc().format('L UTC')}</div>
           </div>
           <div className="detail-item acea-row row-between">
-            <div>Token Distribution</div>
+            <div>{isTestPool ? 'NFT' : 'Token'} Distribution</div>
             <div>{detail.distribution}</div>
           </div>
         </div>
@@ -49,7 +51,7 @@ const TokenInformationV2:React.FC<props> = ({detail})=>{
           </div>
           <div className="detail-item acea-row row-between">
             <div>Token</div>
-            <div>{detail.idoTokenSymbol}</div>
+            <div>{isTestPool ? 'The Chosen One' : detail.idoTokenSymbol}</div>
           </div>
           <div className="detail-item acea-row row-between">
             <div>Name</div>

@@ -23,6 +23,7 @@ const ParticipateV2:React.FC<props> = ({detail})=>{
   const curTime = new Date().getTime()
   const { login, logout } = useAuth()
   const { onPresentConnectModal } = useWalletModal(login, logout)
+  const isTestPool = detail.poolId === 137
 
   const [supportCommTokenApproval,setSupportCommTokenApproval]= useState(false)
   // approve supportCommToken
@@ -101,6 +102,19 @@ const ParticipateV2:React.FC<props> = ({detail})=>{
     if(val===''){
       // Over the limit
       enqueueSnackbar('Please enter number', {
+        variant:'error' ,
+        anchorOrigin: {
+          vertical: 'top',
+          horizontal: 'center',
+        },
+        autoHideDuration: 2500,
+        TransitionComponent: Collapse,
+      });
+      return
+    }
+    if (isTestPool && Number(val) !== 1500) {
+      // Over the limit
+      enqueueSnackbar('You can only fill in 1500 here', {
         variant:'error' ,
         anchorOrigin: {
           vertical: 'top',
@@ -346,6 +360,7 @@ const ParticipateV2:React.FC<props> = ({detail})=>{
             )}
             <div className="acea-row acea-row-margin">
               <div className="input-title">
+                {isTestPool && <div className="approve-btn acea-row row-center-wrapper bt" onClick={() => { window.open('https://forms.gle/o6aGYikTYBsfqcx47') }}>Apply for Whitelist</div>}
                 {detail.configClaimUrl && (
                   <div className="approve-btn acea-row row-center-wrapper bt" style={{ backgroundColor: '#FEE108' }} onClick={() => {window.open(detail.configClaimUrl)}}>Claim</div>
                 )}
@@ -375,12 +390,16 @@ const ParticipateV2:React.FC<props> = ({detail})=>{
               <div>Your Balance</div>
               <div>{userData?userData.supportCommTokenBalance:0} BUSD</div>
             </div>
-            <div className="pd-row acea-row row-between">
+            {!isTestPool && <div className="pd-row acea-row row-between">
               <div>Max Allocation</div>
               <div>{userData?userData.canAmounts:0} BUSD</div>
-            </div>
+            </div>}
+            {isTestPool && <div className="pd-row acea-row row-between">
+              <div>Token Price</div>
+              <div>1500 BUSD</div>
+            </div>}
             <div className="pd-row acea-row row-between">
-              <div>Your token to be claimed:</div>
+              <div>Your {isTestPool ? 'NFT' : 'token'} to be claimed:</div>
               <div>{userData?(userData.stakeAmount * detail.claimRatio).toFixed(3):0} {detail.idoTokenSymbol}</div>
             </div>
             {/*
