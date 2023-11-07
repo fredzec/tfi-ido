@@ -1,12 +1,10 @@
-import { useEffect } from 'react'
-import BigNumber from 'bignumber.js'
+import { useCallback, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useWeb3React } from '@web3-react/core'
 import { useAppDispatch } from 'state'
-import { BIG_ZERO } from 'utils/bigNumber'
 import useRefresh from 'hooks/useRefresh'
-import {State, IdoUserData, IdoStateV2, IdoConfigV2, IdoUserDataV2} from '../types'
-import { fetchIdoPoolsUserDataAsyncV2, fetchIdoPoolsPublicDataAsyncV2 } from './index'
+import { IdoConfigV2, IdoStateV2, IdoUserDataV2, State } from '../types'
+import { fetchIdoPoolsPublicDataAsyncV2, fetchIdoPoolsUserDataAsyncV2 } from './index'
 
 export const useFetchIdoPoolsPublicDataV2 = () => {
   const dispatch = useAppDispatch()
@@ -27,6 +25,15 @@ export const useFetchIdoPoolsUserDataV2 = () => {
     }
   }, [dispatch, slowRefresh,accountV,idoPools])
 
+}
+
+export const useImmediateFetchPoolsUserDataV2 = () => {
+  const dispatch = useAppDispatch()
+  const {account:accountV} = useWeb3React()
+  const {data:idoPools } = useIdoStateV2()
+  return useCallback(() => {
+    dispatch(fetchIdoPoolsUserDataAsyncV2({ pools: idoPools, account: accountV }))
+  }, [idoPools, accountV]);
 }
 
 // ido Pools

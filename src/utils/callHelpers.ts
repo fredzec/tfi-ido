@@ -2,8 +2,8 @@ import BigNumber from 'bignumber.js'
 import { ethers } from 'ethers'
 import {DEFAULT_TOKEN_DECIMAL} from "../config";
 
-export const approve = async (Contract, address, account) => {
-  const tx = await Contract.approve(address, ethers.constants.MaxUint256)
+export const approve = async (Contract, address, account, amount?: any) => {
+  const tx = await Contract.approve(address, amount ?? ethers.constants.MaxUint256)
   const receipt = await tx.wait()
   return receipt.status
 }

@@ -7,7 +7,7 @@ import { useWalletModal } from "trustfi-uikit";
 import { useStakeV2 } from "../hooks/useStake";
 import { useSnackbar } from "notistack";
 import { Collapse } from "@material-ui/core";
-import { useGetIdoUserDataByIdV2 } from "../../../state/idoV2/hooks";
+import { useGetIdoUserDataByIdV2, useImmediateFetchPoolsUserDataV2 } from "../../../state/idoV2/hooks";
 import { useRefund } from "../hooks/useRefund";
 import { useClaim } from "../hooks/useClaim";
 import { useTokenBalanceOfIdoContractV2 } from "../../../hooks/useTokenBalance";
@@ -21,20 +21,25 @@ interface props {
 }
 
 const ParticipateV2: React.FC<props> = ({ detail }) => {
-  const { onAllowanceSupportCommToken, onApproveSupportCommToken } = useApproveTokenToFactoryV2()
+  const isTestPool = detail.poolId === 137
+  const { onAllowanceSupportCommToken, onApproveSupportCommToken } = useApproveTokenToFactoryV2(isTestPool)
   const [requestedApproval, setRequestedApproval] = useState(false)
   const { account } = useWeb3React()
   const curTime = new Date().getTime()
   const { login, logout } = useAuth()
   const { onPresentConnectModal } = useWalletModal(login, logout)
-  const isTestPool = detail.poolId === 137
+  const [approvingFlag, setApprovingFlag] = useState(false)
+  const refreshImmediately = useImmediateFetchPoolsUserDataV2()
 
   const addWhiteListByApi = async () => {
-    const ret = await axios.post('https://farmer.trustfi.org/api/addIdoWhiteList', {
-      message: account,
-      sig: ethers.utils.keccak256('0x' + Buffer.from(`tfi-ido_${account}_tfi-ido`, 'utf-8').toString('hex')),
-    });
-    console.log('addWhiteList api ret', ret.data);
+    try {
+      await axios.post('https://farmer.trustfi.org/api/addIdoWhiteList', {
+        message: account,
+        sig: ethers.utils.keccak256('0x' + Buffer.from(`tfi-ido_${account}_tfi-ido`, 'utf-8').toString('hex')),
+      });
+    } catch (e) {
+      // do nothing
+    }
   }
   const [supportCommTokenApproval, setSupportCommTokenApproval] = useState(false)
   // approve supportCommToken
@@ -48,6 +53,7 @@ const ParticipateV2: React.FC<props> = ({ detail }) => {
       ]);
       if (res) {
         setSupportCommTokenApproval(true)
+        setApprovingFlag(true)
         enqueueSnackbar('Approve Successfully', {
           variant: 'success',
           anchorOrigin: {
@@ -57,6 +63,7 @@ const ParticipateV2: React.FC<props> = ({ detail }) => {
           autoHideDuration: 2500,
           TransitionComponent: Collapse,
         });
+        refreshImmediately()
       }
 
       setRequestedApproval(false)
@@ -97,9 +104,6 @@ const ParticipateV2: React.FC<props> = ({ detail }) => {
     [setClaimWalletAddress],
   )
   useEffect(() => {
-    // if(detail.isBSC && detail.distribution.toLowerCase()!=='airdrop'){
-    //   setClaimWalletAddress(account)
-    // }
     if (detail.isBSC) {
       setClaimWalletAddress(account)
     }
@@ -107,6 +111,12 @@ const ParticipateV2: React.FC<props> = ({ detail }) => {
 
   // get user data
   const userData = useGetIdoUserDataByIdV2(detail?.poolId)
+
+  useEffect(() => {
+    if (userData?.whiteListAmount) {
+      setApprovingFlag(false)
+    }
+  }, [userData]);
 
   // stake action
   const { onStake } = useStakeV2(detail.poolId)
@@ -272,6 +282,14 @@ const ParticipateV2: React.FC<props> = ({ detail }) => {
     }
 
     if (isTestPool) {
+      if (approvingFlag) {
+        return (
+          <div
+            className={`approve-btn acea-row row-center-wrapper bt disable`}>
+            {pendingTx ? 'Pending...' : 'Commit Funds'}
+          </div>
+        )
+      }
       return (supportCommTokenApproval && userData.whiteListAmount) ? (
         <div
           className={`approve-btn acea-row row-center-wrapper bt ${(pendingTx || userData.canAmounts === 0) ? 'disable' : ''}`}
