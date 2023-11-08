@@ -42,11 +42,35 @@ const ParticipateV2: React.FC<props> = ({ detail }) => {
       // do nothing
     }
   }
+
+  // input change value
+  const [val, setVal] = useState('')
+  const handleChange = useCallback(
+    (e: React.FormEvent<HTMLInputElement>) => {
+      if (e.currentTarget.validity.valid) {
+        setVal(e.currentTarget.value.replace(/,/g, '.'))
+      }
+    },
+    [setVal],
+  )
+
   const [supportCommTokenApproval, setSupportCommTokenApproval] = useState(false)
   // approve supportCommToken
   const handleApprove = useCallback(async () => {
     if (requestedApproval) return
     try {
+      if (isTestPool && Number(val) !== 1500) {
+        enqueueSnackbar('You can only fill in 1500 here', {
+          variant: 'error',
+          anchorOrigin: {
+            vertical: 'top',
+            horizontal: 'center',
+          },
+          autoHideDuration: 2500,
+          TransitionComponent: Collapse,
+        });
+        return
+      }
       setRequestedApproval(true)
       const [res] = await Promise.all([
         onApproveSupportCommToken(detail.supportCommToken),
@@ -72,7 +96,7 @@ const ParticipateV2: React.FC<props> = ({ detail }) => {
       console.error(e)
       setRequestedApproval(false)
     }
-  }, [onApproveSupportCommToken, detail, requestedApproval])
+  }, [onApproveSupportCommToken, detail, requestedApproval, val])
 
   // checked supportCommToken Approve
   useEffect(() => {
@@ -86,16 +110,6 @@ const ParticipateV2: React.FC<props> = ({ detail }) => {
     detail, requestedApproval, account
   ])
 
-  // input change value
-  const [val, setVal] = useState('')
-  const handleChange = useCallback(
-    (e: React.FormEvent<HTMLInputElement>) => {
-      if (e.currentTarget.validity.valid) {
-        setVal(e.currentTarget.value.replace(/,/g, '.'))
-      }
-    },
-    [setVal],
-  )
   // input solana address
   const [claimWalletAddress, setClaimWalletAddress] = useState('')
   const handleClaimWalletAddress = useCallback(
