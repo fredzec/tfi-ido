@@ -69,7 +69,7 @@ const ParticipateV2: React.FC<props> = ({ detail }) => {
           autoHideDuration: 2500,
           TransitionComponent: Collapse,
         });
-        return
+        throw new Error('notEnough')
       }
       setRequestedApproval(true)
       const [res] = await Promise.all([
