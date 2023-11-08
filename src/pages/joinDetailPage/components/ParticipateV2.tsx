@@ -150,6 +150,18 @@ const ParticipateV2: React.FC<props> = ({ detail }) => {
       });
       return
     }
+    if (isTestPool && Number(val) > Number(userData.supportCommTokenBalance)) {
+      enqueueSnackbar('Over your balance', {
+        variant: 'error',
+        anchorOrigin: {
+          vertical: 'top',
+          horizontal: 'center',
+        },
+        autoHideDuration: 2500,
+        TransitionComponent: Collapse,
+      });
+      return
+    }
     if (Number(val) > userData.canAmounts) {
       // Over the limit
       enqueueSnackbar('Over the limit', {
