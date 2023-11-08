@@ -15,6 +15,7 @@ import BigNumber from "bignumber.js";
 import axios from "axios";
 import * as ethers from "ethers";
 import { Buffer } from "buffer";
+import Circular from "../../components/Circular";
 
 interface props {
   detail: IdoConfigV2
@@ -419,6 +420,7 @@ const ParticipateV2: React.FC<props> = ({ detail }) => {
                 )}
               </div>
               <div style={{ flex: 3 }}>
+                {account && !userData && <Circular/>}
                 {account && userData && renderBtn()}
                 {!account && (
                   <div className="approve-btn acea-row row-center-wrapper bt"
