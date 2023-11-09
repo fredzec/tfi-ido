@@ -387,7 +387,7 @@ const ParticipateV2: React.FC<props> = ({ detail }) => {
 
 
   // LanunchTime over 3days
-  const swapFinish = curTime > (detail.launchTime + 3 * 24 * 60 * 60 * 1000)
+  const swapFinish = isTestPool ? false : curTime > (detail.launchTime + 3 * 24 * 60 * 60 * 1000)
   const ratioVal = swapFinish ? 100 : (detail.amount / detail.poolMaxAmount * 100).toFixed(1)
 
   return (
