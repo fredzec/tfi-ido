@@ -15,7 +15,7 @@ export const useClaim = (pid: number) => {
   const handleClaim = useCallback(
     async () => {
       const txHash = await claim(idoFactoryContract, pid)
-      dispatch(fetchIdoPoolsPublicDataAsyncV2())
+      dispatch(fetchIdoPoolsPublicDataAsyncV2(null))
       dispatch(fetchIdoPoolsUserDataAsyncV2({account,pools}))
       return txHash
     },
@@ -34,7 +34,7 @@ export const useClaimOtherChain = (pid:number) => {
     async (address: string) => {
       try {
         const txHash = await claimOtherChain(idoFactoryContract, pid,address)
-        dispatch(fetchIdoPoolsPublicDataAsyncV2())
+        dispatch(fetchIdoPoolsPublicDataAsyncV2(null))
         dispatch(fetchIdoPoolsUserDataAsyncV2({account,pools}))
         return txHash
       }catch (e){

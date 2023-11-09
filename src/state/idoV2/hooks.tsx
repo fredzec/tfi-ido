@@ -6,12 +6,12 @@ import useRefresh from 'hooks/useRefresh'
 import { IdoConfigV2, IdoStateV2, IdoUserDataV2, State } from '../types'
 import { fetchIdoPoolsPublicDataAsyncV2, fetchIdoPoolsUserDataAsyncV2 } from './index'
 
-export const useFetchIdoPoolsPublicDataV2 = () => {
+export const useFetchIdoPoolsPublicDataV2 = (poolId?: number) => {
   const dispatch = useAppDispatch()
   const { slowRefresh } = useRefresh()
   useEffect(() => {
-    dispatch(fetchIdoPoolsPublicDataAsyncV2())
-  }, [dispatch, slowRefresh])
+    dispatch(fetchIdoPoolsPublicDataAsyncV2(poolId))
+  }, [dispatch, slowRefresh, poolId])
 }
 
 export const useFetchIdoPoolsUserDataV2 = () => {
