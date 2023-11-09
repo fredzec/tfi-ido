@@ -59,10 +59,6 @@ const closedPrjects =  [{
   }]
 const ProjectList:React.FC<props> = ({viewKey})=>{
   const curTime = new Date().getTime()
-  useFetchIdoPoolsPublicData()
-  useFetchIdoPoolsUserData()
-  useFetchIdoPoolsPublicDataV2()
-  useFetchIdoPoolsUserDataV2()
 
   const {data: pools} = useIdoState()
   const {data: poolsV2} = useIdoStateV2()

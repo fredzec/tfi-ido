@@ -28,7 +28,7 @@ const JoinPageV2:React.FC = ()=>{
   const query = useQuery()
   const poolId = Number(query.get('poolId'))
   useFetchIdoPoolsPublicDataV2(poolId)
-  useFetchIdoPoolsUserDataV2()
+  useFetchIdoPoolsUserDataV2(poolId)
   const findIdo = useGetIdoByNameKeyV2(nameKey)
   const history = useHistory()
   history.listen(route => {
