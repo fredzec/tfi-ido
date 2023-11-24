@@ -394,6 +394,8 @@ const ParticipateV2: React.FC<props> = ({ detail }) => {
   } else {
     if (detail.startAmountOfThisPool && detail.totalAmountOfThisPool) {
       ratioVal = ((detail.startAmountOfThisPool + detail.amount) / detail.totalAmountOfThisPool * 100).toFixed(1)
+    } else {
+      ratioVal = (detail.amount / detail.poolMaxAmount * 100).toFixed(1)
     }
   }
 
