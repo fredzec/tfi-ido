@@ -388,7 +388,14 @@ const ParticipateV2: React.FC<props> = ({ detail }) => {
 
   // LanunchTime over 3days
   const swapFinish = isTestPool ? false : curTime > (detail.launchTime + 7 * 24 * 60 * 60 * 1000)
-  const ratioVal = swapFinish ? 100 : (detail.amount / detail.poolMaxAmount * 100).toFixed(1)
+  let ratioVal: string;
+  if (swapFinish) {
+    ratioVal = '100';
+  } else {
+    if (detail.startAmountOfThisPool && detail.totalAmountOfThisPool) {
+      ratioVal = ((detail.startAmountOfThisPool + detail.amount) / detail.totalAmountOfThisPool * 100).toFixed(1)
+    }
+  }
 
   return (
     <div className="acea-row row-between">

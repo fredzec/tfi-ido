@@ -82,6 +82,8 @@ export const fetchIdoPools = async (poolId?: number) => {
       startTimeForShow: findLocal.startTime,
       endTimeForShow: findLocal.endTime,
       configClaimUrl: claimConfigItem?.claimUrl,
+      startAmountOfThisPool: findLocal.startAmountOfThisPool,
+      totalAmountOfThisPool: findLocal.totalAmountOfThisPool,
     }
 
     return [idoPool];
@@ -169,6 +171,8 @@ export const fetchIdoPools = async (poolId?: number) => {
         startTimeForShow: findLocal.startTime,
         endTimeForShow: findLocal.endTime,
         configClaimUrl: claimConfigItem?.claimUrl,
+        startAmountOfThisPool: findLocal.startAmountOfThisPool,
+        totalAmountOfThisPool: findLocal.totalAmountOfThisPool,
       }
       return idoPool
     })

@@ -118,6 +118,8 @@ export interface IdoConfigV2 {
 
   // 远程配置信息
   configClaimUrl?: string
+  startAmountOfThisPool?: number
+  totalAmountOfThisPool?: number
 }
 export interface IdoUserData {
   poolId: number
