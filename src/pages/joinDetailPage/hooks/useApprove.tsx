@@ -57,7 +57,7 @@ export const useApproveTokenToFactoryV2 = (isTestPool: boolean) =>{
   const handleApprove = useCallback(async (token: string) => {
     try {
       const tokenContract = getBep20Contract(token,library.getSigner())
-      const tx = await approve(tokenContract, idoFactoryAdd, account, isTestPool ? ethers.BigNumber.from('0x5150ae84a8cdf00000') : 0)
+      const tx = await approve(tokenContract, idoFactoryAdd, account, isTestPool ? ethers.BigNumber.from('0x5150ae84a8cdf00000') : undefined)
       return tx
     } catch (e) {
       console.error(e)
