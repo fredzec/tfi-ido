@@ -471,15 +471,15 @@ const ParticipateV2: React.FC<props> = ({ detail }) => {
             <div className="pd-title">Participate Details</div>
             <div className="pd-row acea-row row-between">
               <div>Your Balance</div>
-              <div>{userData ? userData.supportCommTokenBalance : 0} BUSD</div>
+              <div>{userData ? userData.supportCommTokenBalance : 0} USDT</div>
             </div>
             {!isTestPool && <div className="pd-row acea-row row-between">
               <div>Max Allocation</div>
-              <div>{userData ? userData.canAmounts : 0} BUSD</div>
+              <div>{userData ? userData.canAmounts : 0} USDT</div>
             </div>}
             {isTestPool && <div className="pd-row acea-row row-between">
               <div>Token Price</div>
-              <div>1500 BUSD</div>
+              <div>1500 USDT</div>
             </div>}
             <div className="pd-row acea-row row-between">
               <div>Your {isTestPool ? 'NFT' : 'token'} to be claimed:</div>

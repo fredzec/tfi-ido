@@ -45,19 +45,19 @@ class JoinDetailPage extends Component {
 										<div className="pd-title">Participate Details</div>
 										<div className="pd-row acea-row row-between">
 											<div>Balance</div>
-											<div>0 BUSD</div>
+											<div>0 USDT</div>
 										</div>
 										<div className="pd-row acea-row row-between">
 											<div>Allocation</div>
-											<div>0/0 BUSD</div>
+											<div>0/0 USDT</div>
 										</div>
 										<div className="pd-row acea-row row-between">
 											<div>Your token to be claimed:</div>
-											<div>0 BUSD</div>
+											<div>0 USDT</div>
 										</div>
 										<div className="pd-row acea-row row-between">
 											<div>Your funds to be received:</div>
-											<div>0 BUSD</div>
+											<div>0 USDT</div>
 										</div>
 									</div>
 								</div>
@@ -69,11 +69,11 @@ class JoinDetailPage extends Component {
 									<div>Swap progress</div>
 									<div style={{position: 'relative'}}>
 										<div className="progress-warp">
-											
+
 										</div>
 										<div className="progress-line"></div>
 									</div>
-									
+
 									<div className="acea-row row-between">
 										<div>%0</div>
 										<div>%100</div>

@@ -28,7 +28,7 @@ const ProjectCard:React.FC<props> = ({pool,viewKey,version})=>{
       <div className="pi-content">
         <div className="pi-row">
           <div className="pi-row-left">Sale Price:</div>
-          <div className="pi-row-right">{isTestPool ? '1 NFT = 1500 BUSD' : `1 BUSD = ${salePrice} ${pool.idoTokenSymbol}`}</div>
+          <div className="pi-row-right">{isTestPool ? '1 NFT = 1500 USDT' : `1 USDT = ${salePrice} ${pool.idoTokenSymbol}`}</div>
         </div>
         <div className="pi-row">
           <div className="pi-row-left">IDO Starts:</div>

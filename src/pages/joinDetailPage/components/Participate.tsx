@@ -199,23 +199,16 @@ const Participate:React.FC<props> = ({detail})=>{
             <div className="pd-title">Participate Details</div>
             <div className="pd-row acea-row row-between">
               <div>Your Balance</div>
-              <div>{userData?userData.supportCommTokenBalance:0} BUSD</div>
+              <div>{userData?userData.supportCommTokenBalance:0} USDT</div>
             </div>
             <div className="pd-row acea-row row-between">
               <div>Max Allocation</div>
-              <div>{userData?userData.canAmounts:0} BUSD</div>
+              <div>{userData?userData.canAmounts:0} USDT</div>
             </div>
             <div className="pd-row acea-row row-between">
               <div>Your token to be claimed:</div>
               <div>{userData?(userData.stakeAmount * detail.claimRatio).toFixed(3):0} {detail.idoTokenSymbol}</div>
             </div>
-            {/*
-            <div className="pd-row acea-row row-between">
-              <div>Your funds to be received:</div>
-              <div>0 BUSD</div>
-            </div>
-            */}
-
           </div>
         </div>
         {/*

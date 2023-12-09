@@ -24,7 +24,7 @@ const closedPrjects =  [{
     tokenPrice: '$0.05',
     tokenDistribution: 'Claim',
     projectWebsite: 'Meland.ai',
-    salePrice: '1 BUSD = 8 CHEERS',
+    salePrice: '1 USDT = 8 CHEERS',
     IGOStarts: '10:00 AM 29th UTC',
     IGOEnds: '1:00 PM 29th UTC',
     ClaimStarts: '3:30 PM 29th UTC'
@@ -38,7 +38,7 @@ const closedPrjects =  [{
     tokenPrice: '$0.05',
     tokenDistribution: 'Claim',
     projectWebsite: 'Meland.ai',
-    salePrice: '1 BUSD = 181.81 MELD',
+    salePrice: '1 USDT = 181.81 MELD',
     IGOStarts: '7:00 AM 7th UTC',
     IGOEnds: '10:00 AM 7th UTC',
     ClaimStarts: ''
@@ -52,7 +52,7 @@ const closedPrjects =  [{
     tokenPrice: '$0.05',
     tokenDistribution: 'Claim',
     projectWebsite: 'Meland.ai',
-    salePrice: '1 BUSD = 10 BTL',
+    salePrice: '1 USDT = 10 BTL',
     IGOStarts: '10:00 AM 21th UTC',
     IGOEnds: '1:00 PM 21th UTC',
     ClaimStarts: ''
