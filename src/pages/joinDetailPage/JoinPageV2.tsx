@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from 'react-router'
+import { useParams, useLocation } from 'react-router'
 import { useHistory } from 'react-router-dom'
 import MineHeader from '../../components/mine-header/index.js'
 import HowToParticipate from '../../components/how-to-participate/index.js'
@@ -17,10 +17,18 @@ interface paramsProps {
   nameKey: string,
 }
 
+function useQuery() {
+  const { search } = useLocation();
+
+  return React.useMemo(() => new URLSearchParams(search), [search]);
+}
+
 const JoinPageV2:React.FC = ()=>{
-  useFetchIdoPoolsPublicDataV2()
-  useFetchIdoPoolsUserDataV2()
   const {nameKey} = useParams<paramsProps>()
+  const query = useQuery()
+  const poolId = Number(query.get('poolId'))
+  useFetchIdoPoolsPublicDataV2(poolId)
+  useFetchIdoPoolsUserDataV2(poolId)
   const findIdo = useGetIdoByNameKeyV2(nameKey)
   const history = useHistory()
   history.listen(route => {

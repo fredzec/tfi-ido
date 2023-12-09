@@ -6,25 +6,26 @@ import useRefresh from 'hooks/useRefresh'
 import { IdoConfigV2, IdoStateV2, IdoUserDataV2, State } from '../types'
 import { fetchIdoPoolsPublicDataAsyncV2, fetchIdoPoolsUserDataAsyncV2 } from './index'
 
-export const useFetchIdoPoolsPublicDataV2 = () => {
+export const useFetchIdoPoolsPublicDataV2 = (poolId?: number) => {
   const dispatch = useAppDispatch()
   const { slowRefresh } = useRefresh()
   useEffect(() => {
-    dispatch(fetchIdoPoolsPublicDataAsyncV2())
-  }, [dispatch, slowRefresh])
+    dispatch(fetchIdoPoolsPublicDataAsyncV2(poolId))
+  }, [dispatch, slowRefresh, poolId])
 }
 
-export const useFetchIdoPoolsUserDataV2 = () => {
+export const useFetchIdoPoolsUserDataV2 = (poolId?: number) => {
   const dispatch = useAppDispatch()
-  const { slowRefresh } = useRefresh()
-  const {account:accountV} = useWeb3React()
-  const {data:idoPools } = useIdoStateV2()
+  const { account:accountV} = useWeb3React()
+  const idoPools = useSelector((state: State) => state.idoV2.data)
   useEffect(() => {
-    if(accountV && idoPools.length){
+    if (poolId && idoPools.length > 1) {
+      return;
+    }
+    if(accountV && idoPools.length) {
       dispatch(fetchIdoPoolsUserDataAsyncV2({pools:idoPools,account:accountV}))
     }
-  }, [dispatch, slowRefresh,accountV,idoPools])
-
+  }, [dispatch, accountV, idoPools, poolId])
 }
 
 export const useImmediateFetchPoolsUserDataV2 = () => {

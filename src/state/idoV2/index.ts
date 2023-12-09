@@ -11,11 +11,12 @@ const initialState: IdoStateV2 = {
 }
 
 // Async thunks
-export const fetchIdoPoolsPublicDataAsyncV2 = createAsyncThunk<IdoConfigV2[]>(
+export const fetchIdoPoolsPublicDataAsyncV2 = createAsyncThunk<IdoConfigV2[], number | null>(
   'idoV2/fetchIdoPoolsPublicDataAsyncV2',
-  async () => {
+  async (poolId?: number) => {
     try {
-      const pools = await fetchIdoPools()
+      console.log('fetchIdoPoolsPublicDataAsyncV2', poolId)
+      const pools = await fetchIdoPools(poolId)
       return pools
     }catch (e) {
       return []
@@ -26,6 +27,7 @@ export const fetchIdoPoolsUserDataAsyncV2 = createAsyncThunk<IdoUserDataV2[],{ac
   'idoV2/fetchIdoPoolsUserDataAsyncV2',
   async (options:{account:string,pools: IdoConfigV2[]}) => {
     try {
+      console.log('fetchIdoPoolsUserDataAsyncV2', options)
       const res = await fetchIdoPoolsUserData(options.pools,options.account)
       return res
     }catch (e) {

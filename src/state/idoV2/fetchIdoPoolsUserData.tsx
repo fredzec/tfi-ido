@@ -82,5 +82,3 @@ export const fetchIdoPoolsUserData = async (pools: IdoConfigV2[],account:string,
   )
   return data
 }
-
-export default null

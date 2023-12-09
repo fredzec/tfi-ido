@@ -15,7 +15,7 @@ export const useRefund = (pid: number) => {
   const handleRefund = useCallback(
     async () => {
       const txHash = await refund(idoFactoryContract, pid)
-      dispatch(fetchIdoPoolsPublicDataAsyncV2())
+      dispatch(fetchIdoPoolsPublicDataAsyncV2(null))
       dispatch(fetchIdoPoolsUserDataAsyncV2({account,pools}))
       return txHash
     },

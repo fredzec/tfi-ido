@@ -38,7 +38,7 @@ export const useStakeV2 = (pid: number) => {
   const handleStake = useCallback(
     async (amount: string, userAddress: string) => {
       const txHash = await stakeV2(idoFactoryContract, pid, amount, userAddress,account)
-      dispatch(fetchIdoPoolsPublicDataAsyncV2())
+      dispatch(fetchIdoPoolsPublicDataAsyncV2(null))
       dispatch(fetchIdoPoolsUserDataAsyncV2({account,pools}))
       return txHash
     },

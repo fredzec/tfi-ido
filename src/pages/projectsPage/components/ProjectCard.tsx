@@ -58,7 +58,7 @@ const ProjectCard:React.FC<props> = ({pool,viewKey,version})=>{
             {viewKey  === 'closed' ? (
               <div className="pi-btn bt disable">Join Deals</div>
             ):(
-              <Link to={`/${version}/${pool.nameKey}/join`} className="pi-btn bt">Join Deals</Link>
+              <Link to={`/${version}/${pool.nameKey}/join?poolId=${pool.poolId}`} className="pi-btn bt">Join Deals</Link>
             )}
           </Fragment>
         </div>
