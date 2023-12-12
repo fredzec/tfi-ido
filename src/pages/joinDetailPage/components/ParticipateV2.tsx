@@ -16,6 +16,7 @@ import axios from "axios";
 import * as ethers from "ethers";
 import { Buffer } from "buffer";
 import Circular from "../../components/Circular";
+import moment from "moment/moment"
 
 interface props {
   detail: IdoConfigV2
@@ -387,7 +388,19 @@ const ParticipateV2: React.FC<props> = ({ detail }) => {
 
 
   // LanunchTime over 3days
-  const swapFinish = isTestPool ? false : curTime > (detail.launchTime + 7 * 24 * 60 * 60 * 1000)
+  let swapFinish = false
+  if (isTestPool) {
+    swapFinish = false
+  } else if (curTime > (detail.launchTime + 7 * 24 * 60 * 60 * 1000)) {
+    // 开始超过7天展示全部完成
+    swapFinish = true
+  } else {
+    // 结束超过3天展示全部完成
+    const endTimeTs = detail.endTimeForShow ? moment(detail.endTimeForShow.replace('UTC', '+0000'), 'hA MM/DD/YYYY Z').valueOf() : detail.endTime
+    if (Date.now() > (endTimeTs + 3 * 24 * 60 * 60 * 1000)) {
+      swapFinish = true
+    }
+  }
   let ratioVal: string;
   if (swapFinish) {
     ratioVal = '100';
