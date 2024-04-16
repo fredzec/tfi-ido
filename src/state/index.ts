@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import blockReducer from './block'
 import idoReducer from './ido'
 import idoReducerV2 from './idoV2'
+import idoReducerV3 from './idoV3'
 
 const store = configureStore({
   devTools: process.env.NODE_ENV !== 'production',
@@ -10,6 +11,7 @@ const store = configureStore({
     block: blockReducer,
     ido: idoReducer,
     idoV2: idoReducerV2,
+    idoV3: idoReducerV3,
   },
 })
 

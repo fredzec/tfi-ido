@@ -5,13 +5,12 @@ import TopDesc from './top-desc.js'
 import HowToParticipate from '../../components/how-to-participate/index.js'
 import MineFooter from '../../components/mine-footer/index.js'
 import ProjectList from "../projectsPage/components/ProjectList";
-import { useFetchIdoPoolsPublicDataV2, useFetchIdoPoolsUserDataV2 } from "../../state/idoV2/hooks";
+import { useFetchIdoPoolsPublicDataV2,  } from "../../state/idoV2/hooks";
+import { useFetchIdoPoolsPublicDataV3,  } from "../../state/idoV3/hooks";
 
 const HomePage = () => {
-  // useFetchIdoPoolsPublicData()
-  // useFetchIdoPoolsUserData()
   useFetchIdoPoolsPublicDataV2()
-  useFetchIdoPoolsUserDataV2()
+  useFetchIdoPoolsPublicDataV3()
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

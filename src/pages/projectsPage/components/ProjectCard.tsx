@@ -7,7 +7,7 @@ import moment from "moment";
 interface props {
   pool: IdoConfig | IdoConfigV2,
   viewKey: 'upcoming'| 'closed',
-  version: 'v1'| 'v2',
+  version: 'v1'| 'v2' | 'v3',
 }
 const ProjectCard:React.FC<props> = ({pool,viewKey,version})=>{
 
@@ -42,19 +42,8 @@ const ProjectCard:React.FC<props> = ({pool,viewKey,version})=>{
             {pool.endTimeForShow || moment(pool.endTime).utc().format('L LT UTC')}
           </div>
         </div>
-        {/*
-        <div className="pi-row">
-          <div className="pi-row-left">Claim Starts:</div>
-          <div className="pi-row-right">
-            {pool.claimStarts===0?'TBA':moment(pool.claimStarts).utc().format('L LT UTC')}
-          </div>
-        </div>
-        */}
         <div className="acea-row row-between">
           <Fragment>
-            {/*
-            <Link to={`/${pool.nameKey}/detail`} className="pi-btn bt">Details</Link>
-            */}
             {viewKey  === 'closed' ? (
               <div className="pi-btn bt disable">Join Deals</div>
             ):(

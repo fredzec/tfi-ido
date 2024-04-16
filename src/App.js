@@ -9,6 +9,7 @@ import DetailPageTs from './pages/detailPage/DetailPage'
 import JoinPage from "./pages/joinDetailPage/JoinPage";
 import useEagerConnect from "./hooks/useEagerConnect";
 import JoinPageV2 from "./pages/joinDetailPage/JoinPageV2";
+import JoinPageV3 from "./pages/joinDetailPage/JoinPageV3";
 
 function App() {
   useEagerConnect()
@@ -25,6 +26,7 @@ function App() {
             <Route path="/:nameKey/detail" component={DetailPageTs} exact/>
             <Route path="/v1/:nameKey/join" component={JoinPage} exact/>
             <Route path="/v2/:nameKey/join" component={JoinPageV2} exact/>
+            <Route path="/v3/:nameKey/join" component={JoinPageV3} exact/>
             <Redirect to={"/home"}/>
           </Switch>
         </HashRouter>

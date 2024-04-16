@@ -7,6 +7,7 @@ import BigNumber from "bignumber.js";
 import { DEFAULT_TOKEN_DECIMAL, DEFAULT_TOKEN_ZERO_ADDRESS } from "../../config";
 import { getIdoPoolsClaimConfig, getIdoPoolsConfig } from "./helpers";
 import { IdoDefaultData } from "../../config/constants/idos";
+import { convertTimeStr } from "../idoV3/helpers"
 
 export const fetchIdoPools = async (poolId?: number) => {
   // 拉取单个池子信息
@@ -154,7 +155,8 @@ export const fetchIdoPools = async (poolId?: number) => {
         ...findLocal,
         poolId: index,
         idoFactory: idoFactoryAddress,
-        endTime: new BigNumber(poolStakeInfoData[0].endTime.toString()).times(1000).toNumber(),
+        // endTime: new BigNumber(poolStakeInfoData[0].endTime.toString()).times(1000).toNumber(),
+        endTime: convertTimeStr(findLocal.endTime),
         startTime: new BigNumber(poolStakeInfoData[0].startTime.toString()).times(1000).toNumber(),
         idoToken: poolStakeInfoData[0].IDOToken,
         idoTokenDecimals: idoTokenDecimalsV,

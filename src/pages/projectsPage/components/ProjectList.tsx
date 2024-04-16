@@ -10,6 +10,7 @@ import avatar2 from '../../../asset/images/Battlesaga.png'
 import avatar3 from '../../../asset/images/melandai.png'
 import ProjectsItem from '../../../components/projects-item/index.js'
 import {useFetchIdoPoolsPublicDataV2, useFetchIdoPoolsUserDataV2, useIdoStateV2} from "../../../state/idoV2/hooks";
+import { useIdoStateV3 } from "../../../state/idoV3/hooks"
 
 interface props {
   viewKey: 'upcoming'| 'closed',
@@ -62,15 +63,26 @@ const ProjectList:React.FC<props> = ({viewKey})=>{
 
   const {data: pools} = useIdoState()
   const {data: poolsV2} = useIdoStateV2()
+  const {data: poolsV3} = useIdoStateV3()
   const activePools = pools.filter((item)=> item.endTime > curTime)
   const closePools = pools.filter((item)=> item.endTime <= curTime)
   const activePoolsV2 = poolsV2.filter((item)=> item.endTime > curTime)
   const closePoolsV2 = poolsV2.filter((item)=> item.endTime <= curTime)
-  const activePoolToShow = [...activePoolsV2.map((pool) => ({ ...pool, version: 'v2'})), ...activePools.map((pool) => ({ ...pool, version: 'v1'}))]
+  const activePoolsV3 = poolsV3.filter((item)=> item.endTime > curTime)
+  const closePoolsV3 = poolsV3.filter((item)=> item.endTime <= curTime)
+  const activePoolToShow = [
+    ...activePoolsV3.map((pool) => ({ ...pool, version: 'v3'})),
+    ...activePoolsV2.map((pool) => ({ ...pool, version: 'v2'})),
+    ...activePools.map((pool) => ({ ...pool, version: 'v1'}))
+  ]
     .sort((a, b) => {
       return a.startTime - b.startTime
     })
-  const closePoolsToShow = [...closePoolsV2.map((pool) => ({ ...pool, version: 'v2'})), ...closePools.map((pool) => ({ ...pool, version: 'v1'}))]
+  const closePoolsToShow = [
+    ...closePoolsV3.map((pool) => ({ ...pool, version: 'v3'})),
+    ...closePoolsV2.map((pool) => ({ ...pool, version: 'v2'})),
+    ...closePools.map((pool) => ({ ...pool, version: 'v1'}))
+  ]
     .sort((a, b) => {
       return b.endTime - a.endTime
     })

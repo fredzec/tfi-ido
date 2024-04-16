@@ -145,6 +145,14 @@ export interface IdoUserDataV2 {
   supportCommTokenBalance: string
   claimed?: number
 }
+export interface IdoUserDataV3 {
+  poolId: number
+  stakeAmount?: number
+  canClaimAmount?: number
+  lastStakeTime?: number
+  supportCommTokenBalance?: string
+  claimedAmount?: number
+}
 export interface IdoState {
   data: IdoConfig[]
   dataLoaded: boolean
@@ -157,10 +165,16 @@ export interface IdoStateV2 {
   userData: IdoUserDataV2[]
   userDataLoaded: boolean
 }
-
+export interface IdoStateV3 {
+  data: IdoConfigV2[]
+  dataLoaded: boolean
+  userData: IdoUserDataV3[]
+  userDataLoaded: boolean
+}
 // Global state
 export interface State {
   block: BlockState
   ido:  IdoState
   idoV2: IdoStateV2
+  idoV3: IdoStateV3
 }
