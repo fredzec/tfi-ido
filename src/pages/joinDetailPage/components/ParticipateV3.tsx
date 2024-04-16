@@ -256,11 +256,12 @@ const ParticipateV3: React.FC<props> = ({ detail }) => {
             </div>
             <div className="pd-row acea-row row-between">
               <div>Max Allocation</div>
-              <div>TBA</div>
+              <div>Infinite</div>
             </div>
             <div className="pd-row acea-row row-between">
               <div>Your {isTestPool ? 'NFT' : 'token'} to be claimed:</div>
-              <div>{userData?.canClaimAmount ?? 0} {detail.idoTokenSymbol}</div>
+              {/*<div>{userData?.canClaimAmount ?? 0} {detail.idoTokenSymbol}</div>*/}
+              <div>TBA</div>
             </div>
           </div>
         </div>
