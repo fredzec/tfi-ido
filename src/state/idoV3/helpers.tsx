@@ -35,7 +35,7 @@ export const getIdoPoolsConfigV3 = async () => {
           "supportCommToken": "0x55d398326f99059ff775485246999027b3197955",
           "supportCommTokenDecimals": 18,
           "hardCap": 6000000,
-          "receiverAddress": "0xf78760A42Ef9DA969d76F66E8Ef0106422e3Dfec"
+          "receiverAddress": "0x1d0cD21720a2805488953317Fb6Ca8aE7f48Fd64"
         }
       ]
     }
