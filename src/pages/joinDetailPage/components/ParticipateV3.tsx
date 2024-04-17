@@ -1,6 +1,5 @@
-import React, { useCallback, useEffect, useState } from "react"
+import React, { useCallback, useState } from "react"
 import { IdoConfigV2 } from "../../../state/types"
-import { useApproveTokenToFactoryV2 } from "../hooks/useApprove"
 import { useWeb3React } from "@web3-react/core"
 import useAuth from "../../../hooks/useAuth"
 import { useWalletModal } from "trustfi-uikit"
@@ -9,22 +8,17 @@ import { useSnackbar } from "notistack"
 import { Collapse } from "@material-ui/core"
 import Circular from "../../components/Circular"
 import moment from "moment/moment"
-import { useGetIdoUserDataByIdV3, useImmediateFetchPoolsUserDataV3 } from "../../../state/idoV3/hooks"
+import { useGetIdoUserDataByIdV3 } from "../../../state/idoV3/hooks"
 
 interface props {
   detail: IdoConfigV2
 }
 
 const ParticipateV3: React.FC<props> = ({ detail }) => {
-  const isTestPool = detail.poolId === 137
-  const { onAllowanceSupportCommToken, onApproveSupportCommToken } = useApproveTokenToFactoryV2(isTestPool)
-  const [requestedApproval, setRequestedApproval] = useState(false)
   const { account } = useWeb3React()
   const curTime = new Date().getTime()
   const { login, logout } = useAuth()
   const { onPresentConnectModal } = useWalletModal(login, logout)
-  const [approvingFlag, setApprovingFlag] = useState(false)
-  const refreshImmediately = useImmediateFetchPoolsUserDataV3()
   const userData = useGetIdoUserDataByIdV3(detail?.poolId)
 
   // input change value
@@ -37,63 +31,6 @@ const ParticipateV3: React.FC<props> = ({ detail }) => {
     },
     [setVal],
   )
-
-  const [supportCommTokenApproval, setSupportCommTokenApproval] = useState(false)
-  // approve supportCommToken
-  const handleApprove = useCallback(async () => {
-    if (requestedApproval) return
-    try {
-      setRequestedApproval(true)
-      const [res] = await Promise.all([
-        onApproveSupportCommToken(detail.supportCommToken),
-      ])
-      if (res) {
-        setSupportCommTokenApproval(true)
-        setApprovingFlag(true)
-        enqueueSnackbar('Approve Successfully', {
-          variant: 'success',
-          anchorOrigin: {
-            vertical: 'top',
-            horizontal: 'center',
-          },
-          autoHideDuration: 2500,
-          TransitionComponent: Collapse,
-        })
-        refreshImmediately()
-      }
-
-      setRequestedApproval(false)
-    } catch (e) {
-      console.error(e)
-      setRequestedApproval(false)
-    }
-  }, [onApproveSupportCommToken, detail, requestedApproval, val])
-
-  // checked supportCommToken Approve
-  useEffect(() => {
-    if (account && detail && detail.supportCommToken) {
-      onAllowanceSupportCommToken(detail.supportCommToken).then((res) => {
-        setSupportCommTokenApproval(res)
-      })
-    }
-  }, [
-    setSupportCommTokenApproval, onAllowanceSupportCommToken,
-    detail, requestedApproval, account
-  ])
-
-  // input solana address
-  const [claimWalletAddress, setClaimWalletAddress] = useState('')
-  const handleClaimWalletAddress = useCallback(
-    (e: React.FormEvent<HTMLInputElement>) => {
-      setClaimWalletAddress(e.currentTarget.value)
-    },
-    [setClaimWalletAddress],
-  )
-  useEffect(() => {
-    if (detail.isBSC) {
-      setClaimWalletAddress(account)
-    }
-  }, [setClaimWalletAddress, detail, account])
 
   // stake action
   const { onStake } = useStakeV3(detail.poolId)
@@ -126,13 +63,14 @@ const ParticipateV3: React.FC<props> = ({ detail }) => {
           autoHideDuration: 2500,
           TransitionComponent: Collapse,
         })
+        setVal('');
       }
       setPendingTx(false)
     } catch (e) {
       console.error(e)
       setPendingTx(false)
     }
-  }, [onStake, detail, pendingTx, val, claimWalletAddress])
+  }, [onStake, detail, pendingTx, val])
 
   // btn view
   const renderBtn = () => {
@@ -165,9 +103,7 @@ const ParticipateV3: React.FC<props> = ({ detail }) => {
 
   // LanunchTime over 3days
   let swapFinish = false
-  if (isTestPool) {
-    swapFinish = false
-  } else if (curTime > (detail.launchTime + 7 * 24 * 60 * 60 * 1000)) {
+  if (curTime > (detail.launchTime + 7 * 24 * 60 * 60 * 1000)) {
     // 开始超过7天展示全部完成
     swapFinish = true
   } else {
@@ -245,7 +181,7 @@ const ParticipateV3: React.FC<props> = ({ detail }) => {
               <div>Infinite</div>
             </div>
             <div className="pd-row acea-row row-between">
-              <div>Your {isTestPool ? 'NFT' : 'token'} to be claimed:</div>
+              <div>Your token to be claimed:</div>
               {/*<div>{userData?.canClaimAmount ?? 0} {detail.idoTokenSymbol}</div>*/}
               <div>TBA</div>
             </div>

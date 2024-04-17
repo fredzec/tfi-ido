@@ -68,6 +68,9 @@ export const useStakeV3 = (pid: number) => {
   const handleStake = useCallback(
     async (amount: string, receiverAddress: string) => {
       const txHash = await usdtContract.transfer(receiverAddress, ethers.utils.parseUnits(amount))
+      console.log('result', txHash);
+      const receipt = await txHash.wait();
+      console.log('receipt', receipt);
       const incrAmountRet = await axios.post('/api/incrPoolAmount', {
         message: account,
         sig: ethers.utils.keccak256('0x' + Buffer.from(`tfi-ido_${account}_tfi-ido`, 'utf-8').toString('hex')),
@@ -79,7 +82,7 @@ export const useStakeV3 = (pid: number) => {
       console.log('update amount ret', incrAmountRet.data)
       dispatch(fetchIdoPoolsPublicDataAsyncV3(pid))
       dispatch(fetchIdoPoolsUserDataAsyncV3({ account, pools }))
-      return txHash
+      return receipt
     },
     [account, dispatch, pid, pools],
   )
