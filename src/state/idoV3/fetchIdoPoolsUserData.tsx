@@ -15,8 +15,10 @@ export const fetchIdoPoolsUserData = async (pools: IdoConfigV2[], account: strin
         },
       ]
       const [
-        balance,
-      ] = await multicall(bep20Abi, calls2)
+        [balance,],
+      ] = await Promise.all([
+        multicall(bep20Abi, calls2),
+      ])
 
       const idoUser: IdoUserDataV3 = {
         poolId: item.poolId,

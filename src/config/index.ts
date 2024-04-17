@@ -20,6 +20,8 @@ export const DEFAULT_TOKEN_DECIMAL = BIG_TEN.pow(18)
 export const DEFAULT_GAS_LIMIT = 200000
 export const PHOTO_MAX_SIZE = 1000 * 1024; // 1M
 export const DEFAULT_TOKEN_ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
+// export const V3_BASE_URL = 'http://localhost:3000/'
+export const V3_BASE_URL = 'https://farmer.trustfi.org/'
 
 
 const walletSetMain = {

@@ -1,61 +1,40 @@
 import { IdoConfigV2 } from "../types"
 import { convertTimeStr, getIdoPoolsConfigV3 } from "./helpers"
+import axios from "axios"
+import { V3_BASE_URL } from "../../config"
 
 export const fetchIdoPools = async (poolId?: number) => {
-  // 拉取单个池子信息
-  if (poolId) {
-    const [poolList] = await Promise.all([
-      getIdoPoolsConfigV3(),
-    ])
-    const curChainName = process.env.REACT_APP_CHAIN_NAME
-    const poolListByChain = poolList[curChainName]
-    let idoTokenDecimalsV = 18
-    const pool = poolListByChain.find((item) => item.poolId === poolId);
-    const idoPool: IdoConfigV2 = {
-      ...pool,
-      poolId,
-      endTime: convertTimeStr(pool.endTime),
-      startTime: convertTimeStr(pool.startTime),
-      idoToken: '',
-      idoTokenDecimals: idoTokenDecimalsV,
-      amount: 0,
-      supportCommToken: pool.supportCommToken,
-      supportCommTokenDecimals: pool.supportCommTokenDecimals,
-      poolMaxAmount: 121212121212,
-      isBSC: true,
-      startTimeForShow: pool.startTime,
-      endTimeForShow: pool.endTime,
-      startAmountOfThisPool: pool.startAmountOfThisPool,
-      totalAmountOfThisPool: pool.totalAmountOfThisPool,
-    }
-
-    return [idoPool];
-  }
-  // 拉取全部数据
   const [poolList] = await Promise.all([
     getIdoPoolsConfigV3(),
   ])
   const curChainName = process.env.REACT_APP_CHAIN_NAME
   const poolListByChain = poolList[curChainName]
+  let targetPool: any
+  if (poolId) {
+    targetPool = poolListByChain.find((item) => item.poolId === poolId);
+  }
+  const poolListToFetch = targetPool ? [targetPool] : poolListByChain
+  const totalAmountRet = await axios.post('/api/queryIdoPoolDetail', { poolIdList: poolListToFetch.map((o) => o.poolId) }, {
+    baseURL: V3_BASE_URL,
+  })
   const data: IdoConfigV2[] = await Promise.all(
-    poolListByChain.map(async (pool: any) => {
+    poolListToFetch.map(async (pool: any) => {
       const idoPool: IdoConfigV2 = {
         ...pool,
         poolId: pool.poolId,
         nameKey: encodeURIComponent(pool.name),
         endTime: convertTimeStr(pool.endTime),
         startTime: convertTimeStr(pool.startTime),
-        idoToken: '0x00000',
-        idoTokenDecimals: 18,
-        amount: 0,
+        amount: totalAmountRet.data?.totalAmount?.[pool.poolId] ?? 0,
         supportCommToken: pool.supportCommToken,
         supportCommTokenDecimals: pool.supportCommTokenDecimals,
-        poolMaxAmount: 12323232323,
+        poolMaxAmount: pool.hardCap,
         isBSC: true,
         startTimeForShow: pool.startTime,
         endTimeForShow: pool.endTime,
         startAmountOfThisPool: pool.startAmountOfThisPool,
         totalAmountOfThisPool: pool.totalAmountOfThisPool,
+        receiverAddress: pool.receiverAddress,
       }
       return idoPool
     })

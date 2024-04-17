@@ -120,6 +120,7 @@ export interface IdoConfigV2 {
   configClaimUrl?: string
   startAmountOfThisPool?: number
   totalAmountOfThisPool?: number
+  receiverAddress?: string
 }
 export interface IdoUserData {
   poolId: number

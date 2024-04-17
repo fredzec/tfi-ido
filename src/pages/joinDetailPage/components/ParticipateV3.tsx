@@ -4,7 +4,7 @@ import { useApproveTokenToFactoryV2 } from "../hooks/useApprove"
 import { useWeb3React } from "@web3-react/core"
 import useAuth from "../../../hooks/useAuth"
 import { useWalletModal } from "trustfi-uikit"
-import { useStakeV2 } from "../hooks/useStake"
+import { useStakeV3 } from "../hooks/useStake"
 import { useSnackbar } from "notistack"
 import { Collapse } from "@material-ui/core"
 import Circular from "../../components/Circular"
@@ -96,26 +96,12 @@ const ParticipateV3: React.FC<props> = ({ detail }) => {
   }, [setClaimWalletAddress, detail, account])
 
   // stake action
-  const { onStake } = useStakeV2(detail.poolId)
+  const { onStake } = useStakeV3(detail.poolId)
   const [pendingTx, setPendingTx] = useState(false)
   const { enqueueSnackbar } = useSnackbar()
   const handleStake = useCallback(async () => {
     if (val === '') {
-      // Over the limit
       enqueueSnackbar('Please enter number', {
-        variant: 'error',
-        anchorOrigin: {
-          vertical: 'top',
-          horizontal: 'center',
-        },
-        autoHideDuration: 2500,
-        TransitionComponent: Collapse,
-      })
-      return
-    }
-    if (detail.distribution.toLowerCase() === 'airdrop' && claimWalletAddress === '') {
-      // Over the limit
-      enqueueSnackbar(`Please enter the ${detail.distributedName} address`, {
         variant: 'error',
         anchorOrigin: {
           vertical: 'top',
@@ -129,7 +115,7 @@ const ParticipateV3: React.FC<props> = ({ detail }) => {
     if (pendingTx) return
     try {
       setPendingTx(true)
-      const res = await onStake(val, claimWalletAddress)
+      const res = await onStake(val, detail.receiverAddress)
       if (res) {
         enqueueSnackbar('Commit Funds Successfully', {
           variant: 'success',
