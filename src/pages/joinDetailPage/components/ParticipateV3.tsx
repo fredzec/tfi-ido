@@ -113,6 +113,9 @@ const ParticipateV3: React.FC<props> = ({ detail }) => {
       swapFinish = true
     }
   }
+  if (detail.amount >= detail.poolMaxAmount) {
+    swapFinish = true
+  }
   let ratioVal: string
   if (swapFinish) {
     ratioVal = '100'
