@@ -2,13 +2,14 @@ import moment from "moment/moment"
 
 export const getIdoPoolsConfigV3 = async () => {
   try {
-    const url = "https://raw.githubusercontent.com/fredzec/config/main/poolsV3.json"
+    const url = `https://raw.githubusercontent.com/fredzec/config/main/poolsV3.json?rand=${Math.random()}`
     const response = await fetch(url, {
       method: 'get',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/x-www-form-urlencoded'
       },
+      cache: "no-cache"
     })
     if (!response.ok) {
       console.error(response)
