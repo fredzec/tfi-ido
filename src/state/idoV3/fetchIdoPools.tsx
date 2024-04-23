@@ -44,7 +44,7 @@ export const fetchIdoPools = async (poolId?: number) => {
         supportCommToken: pool.supportCommToken,
         supportCommTokenDecimals: pool.supportCommTokenDecimals,
         poolMaxAmount: pool.hardCap,
-        isBSC: true,
+        isBSC: pool.distributedName === 'BSC',
         startTimeForShow: pool.startTime,
         endTimeForShow: pool.endTime,
         startAmountOfThisPool: pool.startAmountOfThisPool,

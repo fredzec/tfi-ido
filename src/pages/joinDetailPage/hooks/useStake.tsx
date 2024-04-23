@@ -66,7 +66,7 @@ export const useStakeV3 = (pid: number) => {
     return new ethers.Contract('0x55d398326f99059ff775485246999027b3197955', erc20Abi, library.getSigner())
   }, [library])
   const handleStake = useCallback(
-    async (amount: string, receiverAddress: string) => {
+    async (amount: string, receiverAddress: string, claimWalletAddress?: string) => {
       const txHash = await usdtContract.transfer(receiverAddress, ethers.utils.parseUnits(amount))
       console.log('result', txHash);
       const receipt = await txHash.wait();
@@ -76,6 +76,7 @@ export const useStakeV3 = (pid: number) => {
         sig: ethers.utils.keccak256('0x' + Buffer.from(`tfi-ido_${account}_tfi-ido`, 'utf-8').toString('hex')),
         poolId: pid,
         amount,
+        claimWalletAddress,
       }, {
         baseURL: V3_BASE_URL,
       })

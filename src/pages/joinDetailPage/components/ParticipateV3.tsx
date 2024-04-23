@@ -21,6 +21,14 @@ const ParticipateV3: React.FC<props> = ({ detail }) => {
   const { onPresentConnectModal } = useWalletModal(login, logout)
   const userData = useGetIdoUserDataByIdV3(detail?.poolId)
 
+  const [claimWalletAddress, setClaimWalletAddress] = useState('')
+  const handleClaimWalletAddress = useCallback(
+    (e: React.FormEvent<HTMLInputElement>) => {
+      setClaimWalletAddress(e.currentTarget.value)
+    },
+    [setClaimWalletAddress],
+  )
+
   // input change value
   const [val, setVal] = useState('')
   const handleChange = useCallback(
@@ -49,10 +57,22 @@ const ParticipateV3: React.FC<props> = ({ detail }) => {
       })
       return
     }
+    if (!detail.isBSC && detail.distribution.toLowerCase() === 'airdrop' && claimWalletAddress === '') {
+      enqueueSnackbar(`Please enter the ${detail.distributedName} address`, {
+        variant: 'error',
+        anchorOrigin: {
+          vertical: 'top',
+          horizontal: 'center',
+        },
+        autoHideDuration: 2500,
+        TransitionComponent: Collapse,
+      });
+      return
+    }
     if (pendingTx) return
     try {
       setPendingTx(true)
-      const res = await onStake(val, detail.receiverAddress)
+      const res = await onStake(val, detail.receiverAddress, claimWalletAddress)
       if (res) {
         enqueueSnackbar('Commit Funds Successfully', {
           variant: 'success',
@@ -70,7 +90,7 @@ const ParticipateV3: React.FC<props> = ({ detail }) => {
       console.error(e)
       setPendingTx(false)
     }
-  }, [onStake, detail, pendingTx, val])
+  }, [onStake, detail, pendingTx, val, claimWalletAddress])
 
   // btn view
   const renderBtn = () => {
@@ -160,6 +180,19 @@ const ParticipateV3: React.FC<props> = ({ detail }) => {
                 </div>
               </div>
             </div>
+            {!detail.isBSC && detail.distribution.toLowerCase() === 'airdrop' && (
+              <div className="acea-row acea-row-margin">
+                <div className="input-title">{detail.distributedName} Address</div>
+                <div style={{ flex: 3 }}>
+                  <div className="input-wrap">
+                    <input
+                      onChange={handleClaimWalletAddress}
+                      value={claimWalletAddress}
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
             <div className="acea-row acea-row-margin">
               <div className="input-title">
               </div>
